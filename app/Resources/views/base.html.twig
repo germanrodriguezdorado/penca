@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+
+         <p>
+                 Hola {{ app.user.nombre }} {{ app.user.apellido }} (<a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Salir</a>)
+                    
+                </p>
+
+                <p>
+                    <a href="{{ path('ingresar_pronosticos') }}" class="btn btn-default btn-flat">Ingresar pronosticos</a>
+                    -
+                    <a href="{{ path('ranking') }}" class="btn btn-default btn-flat">Tabla</a>
+                    ------
+                    <a href="{{ path('equipos') }}" class="btn btn-default btn-flat">Equipos</a>
+                    -
+                    <a href="{{ path('partidos') }}" class="btn btn-default btn-flat">Partidos</a>                    
+                    -
+                    <a href="{{ path('resultados') }}" class="btn btn-default btn-flat">Resultados</a>                    
+                    
+                    
+                </p>
+    
+
+    {% for flashMessage in app.session.flashbag.get('notificacion') %}
+        <p style="color: #53ff49;">{{ flashMessage }}</p>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <p style="color: red;">{{ flashMessage }}</p>
+    {% endfor %}
+
+    {% block main_content %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+    </body>
+</html>

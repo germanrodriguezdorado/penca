@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+	<a href="{{ path('ranking_actualizar') }}" class="btn btn-default btn-flat">Actualizar ranking</a>
+
+
+
+<table class="table">
+
+
+{% for r in ranking %}
+
+<tr>
+	<td>{{ r.usuario.nombre }} {{ r.usuario.apellido }}</td>
+	<td>{{ r.puntos }} puntos</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+{% endblock %}

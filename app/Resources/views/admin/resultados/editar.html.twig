@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+   
+<form action="{{ path('resultado_editar_guardar') }}" method="POST">
+<h2>INGRESAR RESULTADO DE {{ resultado.partido.local.nombre }} vs. {{ resultado.partido.visitante.nombre }} </h2>
+
+<input hidden type="text" name="id" class="form-control" value="{{ resultado.id }}">
+{{ resultado.partido.local.nombre }} <input type="text" name="goles_local" class="form-control" value="{{ resultado.golesLocal }}">
+{{ resultado.partido.visitante.nombre }} <input type="text" name="goles_visitante" class="form-control" value="{{ resultado.golesVisitante }}">
+<br>
+<br>
+
+
+
+
+<button type="post">Guardar</button>
+</form>
+
+
+
+
+{% endblock %}

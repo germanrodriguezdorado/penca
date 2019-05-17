@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+   
+
+<h2>RESULTADOS</h2> 
+
+<table class="table">
+
+{% for resultado in resultados %}
+
+<tr>
+<td>{{ resultado.partido.instancia }}</td>
+<td>{{ resultado.jugado ? "Jugado" : "No Jugado"}}</td>
+<td>{{ resultado.partido.fecha | date("d/m/Y H:i") }}</td>
+<td> {{ resultado.partido.local.nombre }} <b>{{ resultado.golesLocal }}</b> </td>
+<td>-</td>
+<td> <b>{{ resultado.golesVisitante }}</b> {{ resultado.partido.visitante.nombre }} </td>
+
+<td> <a href="{{ path('resultado_editar', { 'id': resultado.id }) }}">Editar</a> </td>
+<td> <a href="{{ path('resultado_quitar', { 'id': resultado.id }) }}">Quitar resultado</a> </td>
+</tr>
+
+{% endfor %}
+
+
+
+
+</table>
+
+
+
+
+
+
+
+{% endblock %}

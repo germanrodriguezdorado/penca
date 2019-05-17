@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+   
+
+<h2>PARTIDOS</h2> <a href="{{ path('partidos_nuevo') }}">Crear nuevo</a>
+
+<table class="table">
+
+{% for partido in partidos %}
+
+<tr>
+<td>{{ partido.instancia }}</td>
+<td>{{ partido.fecha | date("d/m/Y H:i") }}</td>
+<td> {{ partido.local.nombre }} <img width="20" height="20" src="{{ (partido.local.foto != "" and partido.local.foto != null ) ?  asset('fotos_equipos/'~ partido.local.foto)  : asset('imagenes/pelota.png') }}">  </td>
+<td>vs.</td>
+<td><img width="20" height="20" src="{{ (partido.visitante.foto != "" and partido.visitante.foto != null ) ?  asset('fotos_equipos/'~ partido.visitante.foto)  : asset('imagenes/pelota.png') }}"> {{ partido.visitante.nombre }}   </td>
+
+{# <td> <a href="{{ path('equipo_editar', { 'id': partido.id }) }}">Editar</a> </td> #}
+<td> <a href="{{ path('partido_eliminar', { 'id': partido.id }) }}">Eliminar</a> </td>
+</tr>
+
+{% endfor %}
+
+
+
+
+</table>
+
+
+
+
+
+
+
+{% endblock %}

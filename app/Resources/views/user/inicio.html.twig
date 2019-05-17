@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+   
+<form action="{{ path('ingresar_pronosticos') }}" method="POST">
+	
+{% if final|length > 0 %} 
+<h2>FINAL</h2>
+<table class="table">
+	<tbody>	
+   	{% for pronostico in final %}
+		<tr>
+			<td>{{ pronostico.partido.fecha | date("d/m/Y H:i")}} hs.</td>
+			<td> </td>
+			<td>{{ pronostico.partido.local.nombre }} <input {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesLocal }}" type="text" name="{{pronostico.id ~ "-local"}}"></td>
+			<td>vs.</td>
+			<td><input type="text" {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesVisitante }}" name="{{pronostico.id ~ "-visitante"}}"> {{ pronostico.partido.visitante.nombre }}</td>
+		</tr>
+    {% endfor %}
+	</tbody>
+</table>  
+{% endif %}
+
+{% if semi|length > 0 %} 
+<h2>SEMI</h2>
+<table class="table">
+	<tbody>	
+   	{% for pronostico in semi %}
+		<tr>
+			<td>{{ pronostico.partido.fecha | date("d/m/Y H:i")}} hs.</td>
+			<td> </td>
+			<td>{{ pronostico.partido.local.nombre }} <input {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesLocal }}" type="text" name="{{pronostico.id ~ "-local"}}"></td>
+			<td>vs.</td>
+			<td><input type="text" {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesVisitante }}" name="{{pronostico.id ~ "-visitante"}}"> {{ pronostico.partido.visitante.nombre }}</td>
+		</tr>
+    {% endfor %}
+	</tbody>
+</table>  
+{% endif %}
+
+{% if cuartos|length > 0 %} 
+<h2>CUARTOS</h2>
+<table class="table">
+	<tbody>	
+   	{% for pronostico in cuartos %}
+		<tr>
+			<td>{{ pronostico.partido.fecha | date("d/m/Y H:i")}} hs.</td>
+			<td> </td>
+			<td>{{ pronostico.partido.local.nombre }} <input {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesLocal }}" type="text" name="{{pronostico.id ~ "-local"}}"></td>
+			<td>vs.</td>
+			<td><input type="text" {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesVisitante }}" name="{{pronostico.id ~ "-visitante"}}"> {{ pronostico.partido.visitante.nombre }}</td>
+		</tr>
+    {% endfor %}
+	</tbody>
+</table>  
+{% endif %}
+
+{% if octavos|length > 0 %} 
+<h2>OCTAVOS</h2>
+<table class="table">
+	<tbody>	
+   	{% for pronostico in octavos %}
+		<tr>
+			<td>{{ pronostico.partido.fecha | date("d/m/Y H:i")}} hs.</td>
+			<td> </td>
+			<td>{{ pronostico.partido.local.nombre }} <input {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesLocal }}" type="text" name="{{pronostico.id ~ "-local"}}"></td>
+			<td>vs.</td>
+			<td><input type="text" {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesVisitante }}" name="{{pronostico.id ~ "-visitante"}}"> {{ pronostico.partido.visitante.nombre }}</td>
+		</tr>
+    {% endfor %}
+	</tbody>
+</table>  
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<h2>FASE DE GRUPOS</h2>
+<table class="table">
+	<tbody>
+
+	{% set grupo = '' %}		
+   {% for pronostico in fase_grupos %}
+   {% if grupo != pronostico.partido.grupo %} 
+   
+   <tr><td><b>GRUPO {{ pronostico.partido.grupo }}</b></td></tr>
+
+   {% set grupo = pronostico.partido.grupo %}
+   {% endif %}    
+
+<tr>
+	<td>{{ pronostico.partido.fecha | date("d/m/Y H:i")}} hs.</td>
+	<td> </td>
+	<td>{{ pronostico.partido.local.nombre }} <input {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesLocal }}" type="text" name="{{pronostico.id ~ "-local"}}"></td>
+	<td>vs.</td>
+	<td><input type="text" {{ pronostico.partido.esValidoPronosticar == false ? "disabled" }} value="{{ pronostico.golesVisitante }}" name="{{pronostico.id ~ "-visitante"}}"> {{ pronostico.partido.visitante.nombre }}</td>
+</tr>
+
+
+
+
+    {% endfor %}
+</tbody>
+</table>    
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<button type="post">Guardar</button>
+</form>
+
+
+
+
+{% endblock %}
