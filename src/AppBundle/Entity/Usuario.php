@@ -32,13 +32,6 @@ class Usuario extends BaseUser
      */
     private $nombre;
 
-        /**
-     * @var string
-     *
-     * @ORM\Column(name="apellido", type="string", length=255, nullable=true)
-     */
-    private $apellido;
-
 
         /**
      * @var string
@@ -73,29 +66,7 @@ class Usuario extends BaseUser
         return $this->nombre;
     }
 
-    /**
-     * Set apellido
-     *
-     * @param string $apellido
-     *
-     * @return User
-     */
-    public function setApellido($apellido)
-    {
-        $this->apellido = $apellido;
-
-        return $this;
-    }
-
-    /**
-     * Get apellido
-     *
-     * @return string
-     */
-    public function getApellido()
-    {
-        return $this->apellido;
-    }
+   
 
     /**
      * Set tipo

@@ -9,10 +9,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class IngresoPronosticosController extends Controller
 {
     /**
-     * @Route("/ingresar_pronosticos", name="ingresar_pronosticos")     
+     * @Route("/", name="ingresar_pronosticos")     
      */
     public function index(Request $request)
     {
+
+
+            // Si es admin redirigir a resultados
+            if($this->getUser()->getTipo() == "admin"){
+                return $this->redirect($this->generateUrl("resultados"));
+            }
         
     	$em = $this->getDoctrine()->getManager();
     	$fase_grupos = array();
@@ -76,6 +82,9 @@ class IngresoPronosticosController extends Controller
 
 	    			$goles_visitante = $request->get($pronostico->getId()."-visitante");
 	    			$pronostico->setGolesVisitante($goles_visitante);
+
+
+                                                $pronostico->setPronosticado(true);
 
     			}
     			

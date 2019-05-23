@@ -10,7 +10,7 @@
 
 
          <p>
-                 Hola {{ app.user.nombre }} {{ app.user.apellido }} (<a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Salir</a>)
+                 Hola {{ app.user.nombre }} (<a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Salir</a>)
                     
                 </p>
 
@@ -23,7 +23,9 @@
                     -
                     <a href="{{ path('partidos') }}" class="btn btn-default btn-flat">Partidos</a>                    
                     -
-                    <a href="{{ path('resultados') }}" class="btn btn-default btn-flat">Resultados</a>                    
+                    <a href="{{ path('resultados') }}" class="btn btn-default btn-flat">Resultados</a>
+                    -
+                    <a href="{{ path('usuarios') }}" class="btn btn-default btn-flat">Usuarios</a>                    
                     
                     
                 </p>

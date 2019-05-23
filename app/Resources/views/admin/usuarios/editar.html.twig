@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+   
+<form action="{{ path('usuario_editar_guardar') }}" method="POST">
+<h2>EDITAR USUARIO</h2>
+
+<input hidden type="text" name="id" class="form-control" value="{{ usuario.id }}">
+Nombre: <input type="text" name="nombre" class="form-control" value="{{ usuario.nombre }}">
+<br>
+<br>
+Email: <input type="text" name="email" class="form-control" value="{{ usuario.email }}">
+<br>
+<br>
+
+
+
+
+
+<br>
+<button type="post">Guardar</button>
+</form>
+
+
+
+
+{% endblock %}
