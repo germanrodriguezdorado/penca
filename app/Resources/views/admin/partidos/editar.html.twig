@@ -3,9 +3,10 @@
 {% block main_content %}
 
 
-   
+<hr>
+<h4>EDITAR EQUIPO</h4>    
 <form action="{{ path('equipo_editar_guardar') }}" method="POST" enctype="multipart/form-data">
-<h2>EDITAR EQUIPO</h2>
+
 
 <input hidden type="text" name="id" class="form-control" value="{{ equipo.id }}">
 Nombre: <input type="text" name="nombre" class="form-control" value="{{ equipo.nombre }}">
@@ -20,7 +21,7 @@ Foto: <input type="file" name="file">
 
 
 <br>
-<button type="post">Guardar</button>
+<button type="post" class="btn btn-info">Guardar</button>
 </form>
 
 

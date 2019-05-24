@@ -40,6 +40,7 @@ class RankingController extends Controller
      */
     public function actualizar()
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $res = $em->getRepository("AppBundle:Ranking")->calcular();
         return $this->redirect($this->generateUrl("ranking"));

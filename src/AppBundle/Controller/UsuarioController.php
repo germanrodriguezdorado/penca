@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 // Clases
 use AppBundle\Entity\Usuario;
+use AppBundle\Entity\Pronostico;
+use AppBundle\Entity\PuntosExtra;
  
 
 
@@ -23,6 +25,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $usuarios = $em->getRepository("AppBundle:Usuario")->findBy(array("tipo" => "user"));
          return $this->render("admin/usuarios/index.html.twig", array(
@@ -40,6 +43,7 @@ class UsuarioController extends Controller
      */
     public function editar($id)
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $usuario = $em->getRepository("AppBundle:Usuario")->find($id);
         return $this->render("admin/usuarios/editar.html.twig", array("usuario" => $usuario));
@@ -52,6 +56,7 @@ class UsuarioController extends Controller
      */
     public function nuevo()
     {        
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         return $this->render("admin/usuarios/nuevo.html.twig");
     }
 
@@ -63,6 +68,7 @@ class UsuarioController extends Controller
      */
     public function editarGuardar(Request $request)
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));            
         $em = $this->getDoctrine()->getManager();
         $userManager = $this->get("fos_user.user_manager");
         $usuario = $em->getRepository("AppBundle:Usuario")->find($request->get("id"));
@@ -85,6 +91,8 @@ class UsuarioController extends Controller
      */
     public function nuevoGuardar(Request $request)
     {
+
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $userManager = $this->get("fos_user.user_manager");
         $usuario = $userManager->createUser();
@@ -96,6 +104,20 @@ class UsuarioController extends Controller
         $usuario->setPlainPassword("123456");              
         $usuario->setEnabled(true);          
         $userManager->updateUser($usuario);
+
+        // Creo un pronostico para cada partido
+        $partidos = $em->getRepository("AppBundle:Partido")->findAll();
+        foreach ($partidos as $partido) {
+            $pronostico = new Pronostico();
+            $pronostico->setUsuario($usuario);
+            $pronostico->setPartido($partido);
+            $pronostico->setPronosticado(false);
+            $em->persist($pronostico);
+        }
+
+        
+
+
         $em->flush();  
         $this->get("session")->getFlashBag()->add("notificacion", "info guardada");
         return $this->redirect($this->generateUrl("usuarios"));
@@ -110,6 +132,7 @@ class UsuarioController extends Controller
      */
     public function eliminar($id)
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         return $this->redirect($this->generateUrl("usuarios"));
     }
 

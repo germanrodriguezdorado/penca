@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Log in</title>  
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
+</head>
+
+
+<body>
+
+  <div class="container">
+
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />  
+
+    <div class="row">
+        <div class="col-md-3" style="text-align: center;"></div>
+        <div class="col-md-6" style="text-align: center;">
+          <h3>Bienvenido</h3>
+        </div>
+        <div class="col-md-3" style="text-align: center;"></div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-3" style="text-align: center;"></div>
+        <div class="col-md-6" style="text-align: center;">
+          Usuario <input type="text" class="form-control" placeholder="Usuario" name="_username">
+        </div>
+        <div class="col-md-3" style="text-align: center;"></div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-3" style="text-align: center;"></div>
+        <div class="col-md-6" style="text-align: center;">
+          Contraseña <input type="password" class="form-control" placeholder="Contraseña" name="_password">
+        </div>
+        <div class="col-md-3" style="text-align: center;"></div>
+    </div>
+
+    <br>
+
+     <div class="row">
+        <div class="col-md-3" style="text-align: center;"></div>
+        <div class="col-md-6" style="text-align: center;">
+          <button type="submit" class="btn btn-info" name="_submit">Log In</button>
+        </div>
+        <div class="col-md-3" style="text-align: center;"></div>
+    </div>
+
+    <br>
+
+     <div class="row">
+        <div class="col-md-3" style="text-align: center;"></div>
+        <div class="col-md-6" style="text-align: center;">
+          
+           {% if error %}
+     <h4 style="color: red">{{ error.messageKey|trans(error.messageData, 'security') }}</h4>
+      {% endif %}
+
+        </div>
+        <div class="col-md-3" style="text-align: center;"></div>
+    </div>
+
+   
+
+
+</div>
+  </div>
+
+</body>
+
+</html>

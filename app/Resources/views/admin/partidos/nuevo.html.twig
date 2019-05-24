@@ -3,13 +3,14 @@
 {% block main_content %}
 
 
-   
+<hr>
+<h4>NUEVO PARTIDO</h4>   
 <form action="{{ path('partido_nuevo_guardar') }}" method="POST">
-<h2>NUEVO PARTIDO</h2>
+
 
 
 Local: 
-<select name="local">
+<select class="form-control" name="local">
 	{% for equipo in equipos %}
 <option value="{{ equipo.id }}">{{ equipo.nombre }}</option>
 {% endfor %}
@@ -17,21 +18,21 @@ Local:
 <br>
 <br>
 Visitante: 
-<select name="visitante">
+<select class="form-control" name="visitante">
 	{% for equipo in equipos %}
 <option value="{{ equipo.id }}">{{ equipo.nombre }}</option>
 {% endfor %}
 </select>
 <br>
 <br>
-Fecha: <input type="text" name="fecha"> (poner en formato dd/mm/aaaa, ejemplo: 20/01/2018)
+Fecha: <input class="form-control" type="text" name="fecha"> (poner en formato dd/mm/aaaa, ejemplo: 20/01/2018)
 <br>
 <br>
-Hora: <input type="text" name="hora"> (poner en formato HH:MM, ej: 20:30)
+Hora: <input class="form-control" type="text" name="hora"> (poner en formato HH:MM, ej: 20:30)
 <br>
 <br>
 Fase: 
-<select name="instancia">
+<select class="form-control" name="instancia">
 <option value="Fase de grupos">Fase de grupos</option>
 <option value="Octavos de final">Octavos de final</option>
 <option value="Cuartos de final">Cuartos de final</option>
@@ -41,7 +42,7 @@ Fase:
 <br>
 <br>
 GRUPO:
-<select name="grupo">
+<select class="form-control" name="grupo">
 <option value="A">A</option>
 <option value="B">B</option>
 <option value="C">C</option>
@@ -64,7 +65,7 @@ GRUPO:
 
 
 <br>
-<button type="post">Guardar</button>
+<button type="post" class="btn btn-info">Guardar</button>
 </form>
 
 

@@ -15,54 +15,64 @@ class IngresoPronosticosController extends Controller
     {
 
 
-            // Si es admin redirigir a resultados
-            if($this->getUser()->getTipo() == "admin"){
-                return $this->redirect($this->generateUrl("resultados"));
-            }
+        // Si es admin redirigir a resultados
+        if($this->getUser()->getTipo() == "admin"){
+            return $this->redirect($this->generateUrl("resultados"));
+        }
         
+        $respuesta = array();
     	$em = $this->getDoctrine()->getManager();
-    	$fase_grupos = array();
-    	$octavos = array();
-    	$cuartos = array();
-    	$semi = array();
-    	$final = array();
-    	$pronosticos = array();
+    	$partidos = $em->getRepository("AppBundle:Partido")->findBy(array(), array("instancia" => "ASC","grupo" => "ASC", "fecha" => "ASC"));     
+        foreach ($partidos as $partido) {
+          $un_partido = array();
+          $un_partido["id"] = $partido->getId();
+          $un_partido["local"] = $partido->getLocal()->getNombre();  
+          $un_partido["visitante"] = $partido->getVisitante()->getNombre();
+          $un_partido["dia"] = $partido->getFecha()->format("d/m/Y");
+          $un_partido["hora"] = $partido->getFecha()->format("H:i")." hs.";
+          $un_partido["instancia"] = $partido->getInstancia();
+          $un_partido["grupo"] = $partido->getGrupo();
+          $un_partido["es_valido_pronosticar"] = $partido->esValidoPronosticar();
+          
+          // Resultado real
+          $resultado_entidad = $em->getRepository("AppBundle:Resultado")->findOneBy(array("partido" => $partido->getId(), "jugado" => true));     
+          if($resultado_entidad != null){
+            $resultado = array();
+            $resultado["goles_local"] = $resultado_entidad->getGolesLocal();  
+            $resultado["goles_visitante"] = $resultado_entidad->getGolesVisitante();    
+            $un_partido["resultado"] = $resultado;
+          }
 
-    	$partidos_fase_de_grupos = $em->getRepository("AppBundle:Partido")->findBy(array("instancia" => "Fase de grupos"), array("grupo" => "ASC", "fecha" => "ASC"));    	
-    	foreach ($partidos_fase_de_grupos as $p) {
-    		$pronostico = $em->getRepository("AppBundle:Pronostico")->findOneBy(array("usuario" => $this->getUser()->getId(),"partido" => $p->getId()));
-    		array_push($fase_grupos, $pronostico);
-    		array_push($pronosticos, $pronostico);
-    	}
+          // Pronóstico
+          $pronostico_entidad = $em->getRepository("AppBundle:Pronostico")->findOneBy(array("partido" => $partido->getId(), "usuario" => $this->getUser()->getId()));     
+          if($pronostico_entidad != null){
+            $pronostico = array();
+            $pronostico["id"] = $pronostico_entidad->getId(); 
+            $pronostico["goles_local"] = $pronostico_entidad->getGolesLocal();  
+            $pronostico["goles_visitante"] = $pronostico_entidad->getGolesVisitante();    
+            $un_partido["pronostico"] = $pronostico;
 
 
-    	$partidos_octavos = $em->getRepository("AppBundle:Partido")->findBy(array("instancia" => "Octavos de final"), array("fecha" => "ASC"));    	
-    	foreach ($partidos_octavos as $p) {
-    		$pronostico = $em->getRepository("AppBundle:Pronostico")->findOneBy(array("usuario" => $this->getUser()->getId(),"partido" => $p->getId()));
-    		array_push($octavos, $pronostico);
-    		array_push($pronosticos, $pronostico);
-    	}
+            // Puntos
+            if($resultado_entidad != null){
+              $puntaje = $pronostico_entidad->calcularPuntaje($resultado_entidad);
+              $un_partido["puntaje"] = $puntaje;  
+            }else{
+              $un_partido["puntaje"] = "";  
+            }
 
-    	$partidos_cuartos = $em->getRepository("AppBundle:Partido")->findBy(array("instancia" => "Cuartos de final"), array("fecha" => "ASC"));    	
-    	foreach ($partidos_cuartos as $p) {
-    		$pronostico = $em->getRepository("AppBundle:Pronostico")->findOneBy(array("usuario" => $this->getUser()->getId(),"partido" => $p->getId()));
-    		array_push($cuartos, $pronostico);
-    		array_push($pronosticos, $pronostico);
-    	}
 
-    	$partidos_semi = $em->getRepository("AppBundle:Partido")->findBy(array("instancia" => "Semifinal"), array("fecha" => "ASC"));    	
-    	foreach ($partidos_semi as $p) {
-    		$pronostico = $em->getRepository("AppBundle:Pronostico")->findOneBy(array("usuario" => $this->getUser()->getId(),"partido" => $p->getId()));
-    		array_push($semi, $pronostico);
-    		array_push($pronosticos, $pronostico);
-    	}
+          }
 
-    	$partidos_final = $em->getRepository("AppBundle:Partido")->findBy(array("instancia" => "Final"), array("fecha" => "ASC"));    	
-    	foreach ($partidos_final as $p) {
-    		$pronostico = $em->getRepository("AppBundle:Pronostico")->findOneBy(array("usuario" => $this->getUser()->getId(),"partido" => $p->getId()));
-    		array_push($final, $pronostico);
-    		array_push($pronosticos, $pronostico);
-    	}
+          
+          
+
+
+
+          
+          array_push($respuesta, $un_partido);
+        }
+
 
 
 
@@ -70,21 +80,23 @@ class IngresoPronosticosController extends Controller
     	if ($request->getMethod() == "POST") {      
 
 
-    		foreach ($pronosticos as $pronostico) {
+    		foreach ($respuesta as $partido) {
 
 
     			
 
-    			if($pronostico->getPartido()->esValidoPronosticar()){
+    			if($partido["es_valido_pronosticar"] == true){
 
-	    			$goles_local = $request->get($pronostico->getId()."-local");
-	    			$pronostico->setGolesLocal($goles_local);
+            
+            $goles_local = $request->get($partido["pronostico"]["id"]."-local");
+            $goles_visitante = $request->get($partido["pronostico"]["id"]."-visitante");
 
-	    			$goles_visitante = $request->get($pronostico->getId()."-visitante");
-	    			$pronostico->setGolesVisitante($goles_visitante);
-
-
-                                                $pronostico->setPronosticado(true);
+            if($goles_local != "" && $goles_visitante != ""){
+              $pronostico_entidad = $em->getRepository("AppBundle:Pronostico")->find($partido["pronostico"]["id"]);	    			
+  	    			$pronostico_entidad->setGolesLocal($goles_local);	    			
+  	    			$pronostico_entidad->setGolesVisitante($goles_visitante);
+              $pronostico_entidad->setPronosticado(true);      
+            }             
 
     			}
     			
@@ -99,11 +111,7 @@ class IngresoPronosticosController extends Controller
 
 
         return $this->render("user/inicio.html.twig", array(
-        	"fase_grupos" => $fase_grupos,
-        	"octavos" => $octavos,
-        	"cuartos" => $cuartos,
-        	"semi" => $semi,
-        	"final" => $final,
+        	"partidos" => $respuesta
         ));
     }
 }

@@ -3,9 +3,12 @@
 {% block main_content %}
 
 
+
+<hr>
+<h4>NUEVO EQUIPO</h4>
    
 <form action="{{ path('equipo_nuevo_guardar') }}" method="POST" enctype="multipart/form-data">
-<h2>NUEVO EQUIPO</h2>
+
 
 
 Nombre: <input type="text" name="nombre" class="form-control">
@@ -20,7 +23,7 @@ Foto: <input type="file" name="file">
 
 
 <br>
-<button type="post">Guardar</button>
+<button type="post" class="btn btn-info">Guardar</button>
 </form>
 
 

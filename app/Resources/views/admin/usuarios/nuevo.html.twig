@@ -3,9 +3,10 @@
 {% block main_content %}
 
 
-   
+<hr>
+<h4>NUEVO USUARIO</h4>      
 <form action="{{ path('usuario_nuevo_guardar') }}" method="POST">
-<h2>NUEVO USUARIO</h2>
+
 
 
 Nombre: <input type="text" name="nombre" class="form-control">
@@ -20,7 +21,7 @@ Email: <input type="text" name="email" class="form-control">
 
 
 <br>
-<button type="post">Guardar</button>
+<button type="post" class="btn btn-info">Guardar</button>
 </form>
 
 

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Resultado;
 
 /**
  * Pronostico
@@ -217,6 +218,45 @@ class Pronostico
 
 
         return "";
+
+
+    }
+
+
+
+
+
+    public function calcularPuntaje(Resultado $resultado){
+
+        $respuesta = array();
+        $puntos = 0;
+        $logros = array();
+
+        if($this->getPronosticado()){
+
+        // Resultado
+        if($this->darGanador() == $resultado->darGanador()){
+            $puntos = $puntos + 5;
+            array_push($logros, "Acierto al ganador! (5 puntos)");
+        }
+
+
+        // Resultado exacto
+        if($resultado->getGolesLocal() == $this->getGolesLocal()){
+            if($resultado->getGolesVisitante() == $this->getGolesVisitante()){
+                $puntos = $puntos + 3;
+                array_push($logros, "Resultado exacto! (3 puntos)");
+            }
+        }
+
+
+        }
+
+        
+        $respuesta["puntos"] = $puntos;
+        $respuesta["logros"] = $logros;
+
+        return $respuesta;
 
 
     }

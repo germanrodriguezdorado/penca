@@ -5,9 +5,12 @@
 
    
 
-<h2>LISTADO DE USUARIOS</h2> <a href="{{ path('usuario_nuevo') }}">Crear nuevo</a>
+<hr>
+<h4>USUARIOS <a href="{{ path('usuario_nuevo') }}"><button type="button" class="btn btn-link">Crear nuevo</button></a></h4> 
 
-<table>
+<table class="table table-dark">
+
+
 
 {% for usuario in usuarios %}
 

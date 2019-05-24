@@ -20,6 +20,8 @@ class ResultadoController extends Controller
      */
     public function index()
     {
+
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $resultados = $em->getRepository("AppBundle:Resultado")->findAll();
         
@@ -39,6 +41,8 @@ class ResultadoController extends Controller
      */
     public function editar($id)
     {
+
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $resultado = $em->getRepository("AppBundle:Resultado")->find($id);
         return $this->render("admin/resultados/editar.html.twig", array("resultado" => $resultado));
@@ -52,6 +56,7 @@ class ResultadoController extends Controller
      */
     public function editarGuardar(Request $request)
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $resultado = $em->getRepository("AppBundle:Resultado")->find($request->get("id"));
         $resultado->setGolesLocal($request->get("goles_local"));
@@ -68,6 +73,7 @@ class ResultadoController extends Controller
      */
     public function quitar($id)
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $resultado = $em->getRepository("AppBundle:Resultado")->find($id);
         $resultado->setGolesLocal(null);
@@ -93,6 +99,7 @@ class ResultadoController extends Controller
      */
     public function eliminar($id)
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $partido = $em->getRepository("AppBundle:Partido")->find($id);
         // Me fijo si tiene resultados

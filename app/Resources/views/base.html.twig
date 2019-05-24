@@ -5,41 +5,48 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
+        <div class="container">
 
-
-         <p>
-                 Hola {{ app.user.nombre }} (<a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Salir</a>)
-                    
-                </p>
-
+            <br>
                 <p>
-                    <a href="{{ path('ingresar_pronosticos') }}" class="btn btn-default btn-flat">Ingresar pronosticos</a>
-                    -
-                    <a href="{{ path('ranking') }}" class="btn btn-default btn-flat">Tabla</a>
-                    ------
-                    <a href="{{ path('equipos') }}" class="btn btn-default btn-flat">Equipos</a>
-                    -
-                    <a href="{{ path('partidos') }}" class="btn btn-default btn-flat">Partidos</a>                    
-                    -
-                    <a href="{{ path('resultados') }}" class="btn btn-default btn-flat">Resultados</a>
-                    -
-                    <a href="{{ path('usuarios') }}" class="btn btn-default btn-flat">Usuarios</a>                    
+                    {% if( app.user.tipo == "user" ) %}
+                    <a href="{{ path('ingresar_pronosticos') }}"> <button type="button" class="btn btn-info"> Ingresar pronosticos</button> </a>
+                    <a href="{{ path('puntos_extra') }}"> <button type="button" class="btn btn-info"> Puntos extra</button> </a>
+                    {% endif %}
+
+                    <a href="{{ path('ranking') }}"> <button type="button" class="btn btn-info"> Tabla</button></a>
+                    
+                    {% if( app.user.tipo == "admin" ) %}
+                    <a href="{{ path('equipos') }}"><button type="button" class="btn btn-info"> Equipos</button></a>                    
+                    <a href="{{ path('partidos') }}"><button type="button" class="btn btn-info"> Partidos</button></a>                                        
+                    <a href="{{ path('resultados') }}"><button type="button" class="btn btn-info"> Resultados</button></a>                    
+                    <a href="{{ path('usuarios') }}"><button type="button" class="btn btn-info"> Usuarios</button></a>                    
+                    {% endif %}
+
+                    <a style="float: right" href="{{ path('fos_user_security_logout') }}"><button type="button" class="btn btn-info"> Salir</button></a>                    
+                    <button disabled style="float: right" type="button" class="btn btn-light">{{ app.user.nombre }}</button>
                     
                     
                 </p>
     
 
-    {% for flashMessage in app.session.flashbag.get('notificacion') %}
-        <p style="color: #53ff49;">{{ flashMessage }}</p>
+    {% for flashMessage in app.session.flashbag.get('notificacion') %}        
+        <div class="alert alert-success" role="alert">
+    {{ flashMessage }}
+    </div>
     {% endfor %}
 
     {% for flashMessage in app.session.flashbag.get('error') %}
-        <p style="color: red;">{{ flashMessage }}</p>
+            <div class="alert alert-danger" role="alert">
+    {{ flashMessage }}
+    </div>
     {% endfor %}
-
+    
     {% block main_content %}{% endblock %}
     {% block javascripts %}{% endblock %}
+        </div>
     </body>
 </html>

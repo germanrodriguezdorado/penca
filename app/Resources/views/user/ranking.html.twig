@@ -3,11 +3,12 @@
 {% block main_content %}
 
 
-	<a href="{{ path('ranking_actualizar') }}" class="btn btn-default btn-flat">Actualizar ranking</a>
+{% if( app.user.tipo == "admin" ) %}
+	<a href="{{ path('ranking_actualizar') }}" class="btn btn-default btn-flat"><button type="button" class="btn btn-link">Actualizar ranking</button></a>
+{% endif %}
 
 
-
-<table class="table">
+<table class="table table-dark">
 
 
 {% for r in ranking %}

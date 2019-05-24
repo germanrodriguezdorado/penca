@@ -37,8 +37,9 @@ class RankingRepository extends \Doctrine\ORM\EntityRepository
 			foreach ($resultados as $resultado) {
 				$pronostico = $em->getRepository("AppBundle:Pronostico")->findOneBy(array("usuario" => $usuario->getId(), "partido" => $resultado->getPartido()->getId(), "pronosticado" => true));
 				if($pronostico != null){
-					$puntos = $this->calcularPuntaje($resultado, $pronostico);
-					$acumulado_puntos = $acumulado_puntos + $puntos;
+					//$puntos = $this->calcularPuntaje($resultado, $pronostico);
+					$puntaje = $pronostico->calcularPuntaje($resultado);
+					$acumulado_puntos = $acumulado_puntos + $puntaje["puntos"] + 0;
 				}				
 			}
 			$ranking = new Ranking();
@@ -49,31 +50,6 @@ class RankingRepository extends \Doctrine\ORM\EntityRepository
 
 		$em->flush();
 		return "ok";
-
-	}
-
-
-
-
-	private function calcularPuntaje(Resultado $resultado, Pronostico $pronostico){
-
-		$acumulado = 0;
-
-		// Resultado
-		if($pronostico->darGanador() == $resultado->darGanador()){
-			$acumulado = $acumulado + 5;
-		}
-
-
-		// Resultado exacto
-		if($resultado->getGolesLocal() == $pronostico->getGolesLocal()){
-			if($resultado->getGolesVisitante() == $pronostico->getGolesVisitante()){
-				$acumulado = $acumulado + 3;
-			}
-		}
-
-		return $acumulado;
-
 
 	}
 

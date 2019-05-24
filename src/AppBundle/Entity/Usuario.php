@@ -40,6 +40,19 @@ class Usuario extends BaseUser
      */
     private $tipo;    
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Equipo", inversedBy="usuario")
+     * @ORM\JoinColumn(name="campeon", referencedColumnName="id", nullable=true)
+     **/
+    private $campeon;    
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Equipo", inversedBy="usuario")
+     * @ORM\JoinColumn(name="subcampeon", referencedColumnName="id", nullable=true)
+     **/
+    private $subcampeon;     
+
     
 
     /**
@@ -90,5 +103,53 @@ class Usuario extends BaseUser
     public function getTipo()
     {
         return $this->tipo;
+    }
+
+    /**
+     * Set campeon
+     *
+     * @param \AppBundle\Entity\Equipo $campeon
+     *
+     * @return Usuario
+     */
+    public function setCampeon(\AppBundle\Entity\Equipo $campeon = null)
+    {
+        $this->campeon = $campeon;
+
+        return $this;
+    }
+
+    /**
+     * Get campeon
+     *
+     * @return \AppBundle\Entity\Equipo
+     */
+    public function getCampeon()
+    {
+        return $this->campeon;
+    }
+
+    /**
+     * Set subcampeon
+     *
+     * @param \AppBundle\Entity\Equipo $subcampeon
+     *
+     * @return Usuario
+     */
+    public function setSubcampeon(\AppBundle\Entity\Equipo $subcampeon = null)
+    {
+        $this->subcampeon = $subcampeon;
+
+        return $this;
+    }
+
+    /**
+     * Get subcampeon
+     *
+     * @return \AppBundle\Entity\Equipo
+     */
+    public function getSubcampeon()
+    {
+        return $this->subcampeon;
     }
 }

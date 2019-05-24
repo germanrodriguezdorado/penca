@@ -5,22 +5,30 @@
 
    
 
-<h2>RESULTADOS</h2> 
+<hr>
+<h4>RESULTADOS </h4> 
 
-<table class="table">
+<table class="table table-dark">
 
 {% for resultado in resultados %}
 
 <tr>
 <td>{{ resultado.partido.instancia }}</td>
-<td>{{ resultado.jugado ? "Jugado" : "No Jugado"}}</td>
-<td>{{ resultado.partido.fecha | date("d/m/Y H:i") }}</td>
-<td> {{ resultado.partido.local.nombre }} <b>{{ resultado.golesLocal }}</b> </td>
-<td>-</td>
-<td> <b>{{ resultado.golesVisitante }}</b> {{ resultado.partido.visitante.nombre }} </td>
+{% if(resultado.jugado == "Jugado") %}
+<td><span class="badge badge-success">Jugado</span></td>
+{% else %}
+<td><span class="badge badge-danger">No Jugado</span></td>
+{% endif %}
+<td>{{ resultado.partido.fecha | date("d/m/Y H:i") }} hs.</td>
+<td> {{ resultado.partido.local.nombre }} <b>{{ resultado.golesLocal }}</b> - <b>{{ resultado.golesVisitante }}</b> {{ resultado.partido.visitante.nombre }} </td>
 
 <td> <a href="{{ path('resultado_editar', { 'id': resultado.id }) }}">Editar</a> </td>
+
+{% if(resultado.jugado == "Jugado") %}
 <td> <a href="{{ path('resultado_quitar', { 'id': resultado.id }) }}">Quitar resultado</a> </td>
+{% else %}
+<td></td>
+{% endif %}
 </tr>
 
 {% endfor %}

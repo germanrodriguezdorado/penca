@@ -25,6 +25,7 @@ class PartidoController extends Controller
      */
     public function index()
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $partidos = $em->getRepository("AppBundle:Partido")->findBy(array(),array("fecha" => "ASC"));
         
@@ -44,6 +45,7 @@ class PartidoController extends Controller
      */
     public function nuevo()
     {    
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();    
         $equipos = $em->getRepository("AppBundle:Equipo")->findAll();
         return $this->render("admin/partidos/nuevo.html.twig", array("equipos" => $equipos));
@@ -61,6 +63,8 @@ class PartidoController extends Controller
      */
     public function nuevoGuardar(Request $request)
     {
+
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $partido = new Partido();
         $partido->setLocal($em->getRepository("AppBundle:Equipo")->find($request->get("local")));
@@ -106,6 +110,8 @@ class PartidoController extends Controller
      */
     public function eliminar($id)
     {
+
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $partido = $em->getRepository("AppBundle:Partido")->find($id);
 

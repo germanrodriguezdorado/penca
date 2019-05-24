@@ -23,6 +23,9 @@ class EquipoController extends Controller
      */
     public function index()
     {
+
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
+
         $em = $this->getDoctrine()->getManager();
         $equipos = $em->getRepository("AppBundle:Equipo")->findAll();
         
@@ -42,6 +45,7 @@ class EquipoController extends Controller
      */
     public function editar($id)
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $equipo = $em->getRepository("AppBundle:Equipo")->find($id);
         return $this->render("admin/equipos/editar.html.twig", array("equipo" => $equipo));
@@ -54,6 +58,7 @@ class EquipoController extends Controller
      */
     public function nuevo()
     {        
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         return $this->render("admin/equipos/nuevo.html.twig");
     }
 
@@ -65,6 +70,7 @@ class EquipoController extends Controller
      */
     public function editarGuardar(Request $request)
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $equipo = $em->getRepository("AppBundle:Equipo")->find($request->get("id"));
         $equipo->setNombre($request->get("nombre"));
@@ -98,6 +104,8 @@ class EquipoController extends Controller
      */
     public function nuevoGuardar(Request $request)
     {
+
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $equipo = new Equipo();
         $equipo->setNombre($request->get("nombre"));
@@ -131,6 +139,7 @@ class EquipoController extends Controller
      */
     public function eliminar($id)
     {
+        if($this->getUser()->getTipo() == "user") return $this->redirect($this->generateUrl("ingresar_pronosticos"));        
         $em = $this->getDoctrine()->getManager();
         $equipo = $em->getRepository("AppBundle:Equipo")->find($id);
         // Me fijo si tiene partidos
