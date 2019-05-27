@@ -34,7 +34,7 @@
 <tr>
 <td>{{ partido.instancia }} {% if(partido.grupo != "") %} - Grupo {{partido.grupo }} {% endif %}</td>
 <td>{{ partido.dia }} {{ partido.hora }}</td>
-<td>{{ partido.local }} <input maxlength="2" class="pronostico_input" {{ partido.es_valido_pronosticar == false ? "disabled" }} value="{{ partido.pronostico.goles_local }}" type="number" name="{{partido.pronostico.id ~ "-local"}}"> vs. <input maxlength="2" class="pronostico_input" {{ partido.es_valido_pronosticar == false ? "disabled" }} value="{{ partido.pronostico.goles_visitante }}" type="number" name="{{partido.pronostico.id ~ "-visitante"}}"> {{ partido.visitante }}</td>
+<td>{{ partido.local }} <input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }}  value="{{ partido.pronostico.goles_local }}" type="number" name="{{partido.pronostico.id ~ "-local"}}"> vs. <input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }} value="{{ partido.pronostico.goles_visitante }}" type="number" name="{{partido.pronostico.id ~ "-visitante"}}"> {{ partido.visitante }}</td>
 
 {% if(partido.resultado is defined) %}
 <td>{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</td>
@@ -99,6 +99,17 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+
+
+
+.des{
+    background-color: #939393;
+    border-color: #939393;
+}
+
+
+
+
 
 </style>
 
