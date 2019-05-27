@@ -24,6 +24,14 @@ class PuntosExtra
 
 
     /**
+     * @var datetime
+     *
+     * @ORM\Column(name="hasta", type="datetime", nullable=true)
+     */
+    private $hasta;    
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="Equipo", inversedBy="puntosExtra")
      * @ORM\JoinColumn(name="campeon", referencedColumnName="id", nullable=true)
      **/
@@ -99,4 +107,42 @@ class PuntosExtra
     {
         return $this->subcampeon;
     }
+
+    /**
+     * Set hasta.
+     *
+     * @param \DateTime|null $hasta
+     *
+     * @return PuntosExtra
+     */
+    public function setHasta($hasta = null)
+    {
+        $this->hasta = $hasta;
+
+        return $this;
+    }
+
+    /**
+     * Get hasta.
+     *
+     * @return \DateTime|null
+     */
+    public function getHasta()
+    {
+        return $this->hasta;
+    }
+
+
+    public function esValidoCambiar(){
+        $respuesta = true;
+        $ahora = new \DateTime("now");
+        
+        
+        if($ahora->format("YmdHis") > $this->getHasta()->format("YmdHis")){
+            $respuesta = false;
+        }
+        return $respuesta;
+    }
+
+
 }

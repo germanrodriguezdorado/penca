@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\PuntosExtra;
+
 
 /**
  * @ORM\Entity
@@ -152,4 +154,37 @@ class Usuario extends BaseUser
     {
         return $this->subcampeon;
     }
+
+
+    public function puntosExtraGenerados(PuntosExtra $puntos_extra){
+
+        $acumulado = 0;
+
+        if($puntos_extra->getCampeon() == null || $puntos_extra->getSubcampeon() == null){
+            return $acumulado;
+        }
+
+
+        if($this->getCampeon() == null || $this->getSubcampeon() == null){
+            return $acumulado;
+        }
+
+
+        // Por acertar al campeon
+        if($puntos_extra->getCampeon()->getId() == $this->getCampeon()->getId() ){
+            $acumulado = $acumulado + 15;
+        }
+
+        // Por acertar al subcampeon
+        if($puntos_extra->getSubcampeon()->getId() == $this->getSubcampeon()->getId() ){
+            $acumulado = $acumulado + 10;
+        }
+
+
+        return $acumulado;
+
+
+    }
+
+
 }

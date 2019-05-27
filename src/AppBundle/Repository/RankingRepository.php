@@ -34,6 +34,8 @@ class RankingRepository extends \Doctrine\ORM\EntityRepository
 		
 		foreach ($usuarios as $usuario) {				
 			$acumulado_puntos = 0;
+
+			// En base a resultados
 			foreach ($resultados as $resultado) {
 				$pronostico = $em->getRepository("AppBundle:Pronostico")->findOneBy(array("usuario" => $usuario->getId(), "partido" => $resultado->getPartido()->getId(), "pronosticado" => true));
 				if($pronostico != null){
@@ -42,6 +44,13 @@ class RankingRepository extends \Doctrine\ORM\EntityRepository
 					$acumulado_puntos = $acumulado_puntos + $puntaje["puntos"] + 0;
 				}				
 			}
+
+
+			// Por puntos extra
+			$puntos_extra = $em->getRepository("AppBundle:PuntosExtra")->find(1);
+			$acumulado_puntos = $acumulado_puntos + $usuario->puntosExtraGenerados($puntos_extra) + 0;
+
+
 			$ranking = new Ranking();
 			$ranking->setUsuario($usuario);
 			$ranking->setPuntos($acumulado_puntos);

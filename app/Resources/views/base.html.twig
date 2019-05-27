@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Penca{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,6 +15,7 @@
                     {% if( app.user.tipo == "user" ) %}
                     <a href="{{ path('ingresar_pronosticos') }}"> <button type="button" class="btn btn-info"> Ingresar pronosticos</button> </a>
                     <a href="{{ path('puntos_extra') }}"> <button type="button" class="btn btn-info"> Puntos extra</button> </a>
+                    <a href="{{ path('mis_datos') }}"> <button type="button" class="btn btn-info"> Info de usuario</button> </a>
                     {% endif %}
 
                     <a href="{{ path('ranking') }}"> <button type="button" class="btn btn-info"> Tabla</button></a>
@@ -22,7 +23,8 @@
                     {% if( app.user.tipo == "admin" ) %}
                     <a href="{{ path('equipos') }}"><button type="button" class="btn btn-info"> Equipos</button></a>                    
                     <a href="{{ path('partidos') }}"><button type="button" class="btn btn-info"> Partidos</button></a>                                        
-                    <a href="{{ path('resultados') }}"><button type="button" class="btn btn-info"> Resultados</button></a>                    
+                    <a href="{{ path('resultados') }}"><button type="button" class="btn btn-info"> Resultados</button></a>
+                    <a href="{{ path('puntos_extra_admin') }}"><button type="button" class="btn btn-info"> Puntos Extra</button></a>                    
                     <a href="{{ path('usuarios') }}"><button type="button" class="btn btn-info"> Usuarios</button></a>                    
                     {% endif %}
 

@@ -14,6 +14,12 @@
 <hr>
 <h4>PUNTOS EXTRA </h4> 
 
+{% if(puntos_extra.esValidoCambiar()) %}
+<div class="alert alert-info" role="alert">
+  Tiene tiempo para modificar estos datos hasta el {{ puntos_extra.hasta | date("d/m/Y H:i") }} hs.
+</div>
+{% endif %}
+
 <table class="table table-dark">
 	
 	<tbody>
@@ -21,10 +27,12 @@
 		<tr>
 			<td>Campeón: </td>
 			<td>
-				<select class="form-control" name="campeon">
+
+				
+				<select {{ puntos_extra.esValidoCambiar() == false ? 'disabled' : '' }} class="form-control" name="campeon">
 
 
-
+					<option value="" {{ app.user.campeon is null ? 'selected' : '' }}>  </option>
 				{% for equipo in equipos %}
 
 					<option value="{{ equipo.id }}" {{ ( app.user.campeon != null and equipo.id == app.user.campeon.id) ? 'selected' : '' }}> {{ equipo.nombre }} </option>
@@ -40,8 +48,8 @@
 		<tr>
 			<td>Sub Campeón: </td>
 			<td>
-				<select class="form-control" name="subcampeon">
-
+				<select {{ puntos_extra.esValidoCambiar() == false ? 'disabled' : '' }} class="form-control" name="subcampeon">
+					<option value="" {{ app.user.subcampeon is null ? 'selected' : '' }}>  </option>
 
 
 				{% for equipo in equipos %}
@@ -71,7 +79,16 @@
 
 
 <br>
+{% if(puntos_extra.esValidoCambiar()) %}
 <button class="btn btn-info" type="post">Guardar</button>
+{% endif %}
+
+
+{% if(puntos_extra.esValidoCambiar() == false) %}
+<h3> {{ app.user.puntosExtraGenerados(puntos_extra) }} puntos ganados </h3>
+{% endif %}
+
+
 </form>
 
 

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+   
+<form action="{{ path('mis_datos') }}" method="POST">
+
+
+
+
+
+
+<hr>
+<h4>MIS DATOS </h4> 
+
+Nombre <input class="form-control" type="text" name="nombre" value="{{ app.user.nombre }}">
+<br>
+Cambiar contraseña <input class="form-control" type="text" name="password">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<button class="btn btn-info" type="post">Guardar</button>
+
+
+</form>
+
+
+<style type="text/css">
+
+
+.pronostico_input{
+	text-align: center;
+	width: 50px;
+}
+
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+</style>
+
+
+
+
+{% endblock %}

@@ -24,7 +24,7 @@ class RankingController extends Controller
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        $ranking = $em->getRepository("AppBundle:Ranking")->findAll(array(), array("puntos" => "DESC"));
+        $ranking = $em->getRepository("AppBundle:Ranking")->findBy(array(), array("puntos" => "DESC"));
         
 
          return $this->render("user/ranking.html.twig", array(

@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+   
+<form action="{{ path('puntos_extra_admin') }}" method="POST">
+
+
+
+
+
+
+<hr>
+<h4>ASIGNAR PUNTOS EXTRA </h4> 
+
+<table class="table table-dark">
+	
+	<tbody>
+
+
+		<tr>
+			<td>Hasta que hora se puede completar (respetar formato): </td>
+			<td> <input type="text" name="hasta" class="form-control" value="{{ puntos_extra.hasta | date("d/m/Y H:i")  }}"> </td>
+		</tr>	
+
+
+
+		<tr>
+			<td>Campeón: </td>
+			<td>
+
+				
+				<select class="form-control" name="campeon">
+
+
+					<option value="" {{ puntos_extra.campeon is null ? 'selected' : '' }}>  </option>
+				{% for equipo in equipos %}
+
+					<option value="{{ equipo.id }}" {{ ( puntos_extra.campeon != null and equipo.id == puntos_extra.campeon.id) ? 'selected' : '' }}> {{ equipo.nombre }} </option>
+
+				{% endfor %}
+
+				</select>
+
+			</td>
+		</tr>
+
+
+		<tr>
+			<td>Sub Campeón: </td>
+			<td>
+				<select class="form-control" name="subcampeon">
+					<option value="" {{ puntos_extra.subcampeon is null ? 'selected' : '' }}>  </option>
+
+
+				{% for equipo in equipos %}
+
+					<option {{ ( puntos_extra.subcampeon != null and equipo.id == puntos_extra.subcampeon.id) ? 'selected' : '' }} value="{{ equipo.id }}"> {{ equipo.nombre }} </option>
+
+				{% endfor %}
+
+				</select>
+
+			</td>
+		</tr>
+
+
+</tbody>
+</table>    
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<button class="btn btn-info" type="post">Guardar</button>
+</form>
+
+
+<style type="text/css">
+
+
+.pronostico_input{
+	text-align: center;
+	width: 50px;
+}
+
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+</style>
+
+
+
+
+{% endblock %}

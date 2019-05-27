@@ -12,19 +12,18 @@
 
 
 <hr>
+
+{% if app.user.campeon is null or app.user.subcampeon is null  %}        
+        <div class="alert alert-danger" role="alert">
+    Puntos extra sin ingresar!! <a href="{{ path('puntos_extra') }}">Ir a puntos extra</a>
+    </div>
+    {% endif %}
+
+
 <h4>PRONÓSTICOS </h4> 
 
 <table class="table table-dark">
-	<thead>
-		<tr>
-			<td>Instancia</td>
-			<td>Día</td>			
-			<td>Partido</td>			
-			<td>Resultado</td>
-			<td>Puntos</td>
-			<td></td>
-		</tr>
-	</thead>
+	
 	<tbody>
 
 	
@@ -39,7 +38,7 @@
 
 {% if(partido.resultado is defined) %}
 <td>{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</td>
-<td>{{ partido.puntaje.puntos }}</td>
+<td>{{ partido.puntaje.puntos }} puntos</td>
 <td>
 	{% for logro in partido.puntaje.logros %}
 		<p style="font-size: 11px; margin-bottom: 0px;">{{ logro }}</p>

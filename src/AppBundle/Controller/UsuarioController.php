@@ -140,4 +140,29 @@ class UsuarioController extends Controller
 
 
 
+    /**
+     * @Route("/mis_datos", name="mis_datos")     
+     */
+    public function misDatos(Request $request)
+    {
+        if($this->getUser()->getTipo() == "admin") return $this->redirect($this->generateUrl("resultados"));        
+        
+        if($request->getMethod() == "POST") {    
+            $em = $this->getDoctrine()->getManager();
+            $this->getUser()->setNombre($request->get("nombre"));
+            if($request->get("password") != ""){
+                $this->getUser()->setPlainPassword($request->get("password"));       
+            }
+            $userManager = $this->get("fos_user.user_manager");
+            $userManager->updateUser($this->getUser());
+            $this->get("session")->getFlashBag()->add("notificacion", "info guardada");
+            return $this->redirect($this->generateUrl("mis_datos"));
+        }
+        return $this->render("user/mis_datos.html.twig");
+    }    
+
+
+
+
+
 }
