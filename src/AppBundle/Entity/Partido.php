@@ -196,7 +196,7 @@ class Partido
     public function esValidoPronosticar(){
         $respuesta = true;
         $ahora = new \DateTime("now");
-        $ahora->modify("+4 hours");
+        $ahora->modify("+2 hours");
 
 
 

@@ -13,6 +13,7 @@
             <br>
                 <p>
                     {% if( app.user.tipo == "user" ) %}
+                        <a href="{{ path('reglamento') }}"> <button type="button" class="btn btn-success"> Reglamento</button> </a>
                     <a href="{{ path('ingresar_pronosticos') }}"> <button type="button" class="btn btn-info"> Ingresar pronosticos</button> </a>
                     <a href="{{ path('puntos_extra') }}"> <button type="button" class="btn btn-info"> Puntos extra</button> </a>
                     <a href="{{ path('mis_datos') }}"> <button type="button" class="btn btn-info"> Info de usuario</button> </a>
