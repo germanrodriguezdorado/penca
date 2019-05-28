@@ -12,7 +12,7 @@
 {% for equipo in equipos %}
 
 <tr>
-<td> <img width="40" height="40" src="{{ (equipo.foto != "" and equipo.foto != null ) ?  asset('fotos_equipos/'~ equipo.foto)  : asset('imagenes/pelota.png') }}">  </td>
+<td> <img width="61" height="40" src="{{ (equipo.foto != "" and equipo.foto != null ) ?  asset('fotos_equipos/'~ equipo.foto)  : asset('imagenes/pelota.png') }}">  </td>
 <td> {{ equipo.nombre }} </td>
 <td> <a href="{{ path('equipo_editar', { 'id': equipo.id }) }}">Editar</a> </td>
 <td> <a href="{{ path('equipo_eliminar', { 'id': equipo.id }) }}">Eliminar</a> </td>

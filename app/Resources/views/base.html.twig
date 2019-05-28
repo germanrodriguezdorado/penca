@@ -6,6 +6,7 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}" />
     </head>
     <body>
         <div class="container">
@@ -13,10 +14,11 @@
             <br>
                 <p>
                     {% if( app.user.tipo == "user" ) %}
-                        <a href="{{ path('reglamento') }}"> <button type="button" class="btn btn-success"> Reglamento</button> </a>
+                    <a href="{{ path('reglamento') }}"> <button type="button" class="btn btn-success"> Reglamento</button> </a>
                     <a href="{{ path('ingresar_pronosticos') }}"> <button type="button" class="btn btn-info"> Ingresar pronosticos</button> </a>
                     <a href="{{ path('puntos_extra') }}"> <button type="button" class="btn btn-info"> Puntos extra</button> </a>
                     <a href="{{ path('mis_datos') }}"> <button type="button" class="btn btn-info"> Info de usuario</button> </a>
+                    <a href="{{ path('redactar_sugerencias') }}"> <button type="button" class="btn btn-info"> Sugerencias</button> </a>
                     {% endif %}
 
                     <a href="{{ path('ranking') }}"> <button type="button" class="btn btn-info"> Tabla</button></a>
@@ -27,6 +29,7 @@
                     <a href="{{ path('resultados') }}"><button type="button" class="btn btn-info"> Resultados</button></a>
                     <a href="{{ path('puntos_extra_admin') }}"><button type="button" class="btn btn-info"> Puntos Extra</button></a>                    
                     <a href="{{ path('usuarios') }}"><button type="button" class="btn btn-info"> Usuarios</button></a>                    
+                    <a href="{{ path('leer_sugerencias') }}"> <button type="button" class="btn btn-info"> Sugerencias</button> </a>
                     {% endif %}
 
                     <a style="float: right" href="{{ path('fos_user_security_logout') }}"><button type="button" class="btn btn-info"> Salir</button></a>                    
@@ -34,6 +37,13 @@
                     
                     
                 </p>
+
+
+    {% if( app.user.tipo == "user" ) %}
+    <div class="alert alert-warning" role="alert">
+    FASE BETA: CUALQUIER ERROR O CASA RARA <a href="{{ path('redactar_sugerencias') }}">AVISEN</a> QUE SE VIENE LA COPAA!!
+    </div> 
+    {% endif %}               
     
 
     {% for flashMessage in app.session.flashbag.get('notificacion') %}        

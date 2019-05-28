@@ -28,8 +28,10 @@ class IngresoPronosticosController extends Controller
           $un_partido["id"] = $partido->getId();
           $un_partido["local"] = $partido->getLocal()->getNombre();  
           $un_partido["visitante"] = $partido->getVisitante()->getNombre();
+          $un_partido["foto_local"] = $partido->getLocal()->getFoto();  
+          $un_partido["foto_visitante"] = $partido->getVisitante()->getFoto();  
           $un_partido["dia"] = $partido->getFecha()->format("d/m/Y");
-          $un_partido["hora"] = $partido->getFecha()->format("H:i")." hs.";
+          $un_partido["hora"] = $partido->getFecha()->format("H:i")."hs.";
           $un_partido["instancia"] = $partido->getInstancia();
           $un_partido["grupo"] = $partido->getGrupo();
           $un_partido["es_valido_pronosticar"] = $partido->esValidoPronosticar();

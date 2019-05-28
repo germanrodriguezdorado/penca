@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+   
+<form action="{{ path('redactar_sugerencias') }}" method="POST">
+
+<hr>
+<h4>ENVIAR ALGUNA SUGERENCIA O REPORTAR ERROR</h4> 
+<textarea rows="7" class="form-control" name="sugerencia"></textarea>
+<br>
+
+<button class="btn btn-info" type="post">Enviar</button>
+
+</form>
+
+
+
+
+{% endblock %}

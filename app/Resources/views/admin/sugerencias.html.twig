@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+   
+
+<hr>
+<h4>SUGERENCIAS ENVIADAS POR LOS USUARIOS </h4> 
+
+<table class="table">
+
+
+
+{% for sugerencia in sugerencias %}
+
+<tr>
+<td> {{ sugerencia.usuario.nombre }} </td>
+<td> {{ sugerencia.sugerencia }} </td>
+</tr>
+
+{% endfor %}
+
+
+
+
+</table>
+
+
+
+
+
+
+
+{% endblock %}

@@ -224,6 +224,12 @@ class Pronostico
 
 
 
+    public function darDiferenciaDeGoles(){
+        return abs($this->getGolesLocal() - $this->getGolesVisitante());
+    }
+
+
+
 
 
     public function calcularPuntaje(Resultado $resultado){
@@ -234,20 +240,27 @@ class Pronostico
 
         if($this->getPronosticado()){
 
-        // Resultado
-        if($this->darGanador() == $resultado->darGanador()){
-            $puntos = $puntos + 5;
-            array_push($logros, "Acierto al ganador! (5 puntos)");
-        }
-
-
-        // Resultado exacto
-        if($resultado->getGolesLocal() == $this->getGolesLocal()){
-            if($resultado->getGolesVisitante() == $this->getGolesVisitante()){
-                $puntos = $puntos + 3;
-                array_push($logros, "Resultado exacto! (3 puntos)");
+            // Resultado
+            if($this->darGanador() == $resultado->darGanador()){
+                $puntos = $puntos + 5;
+                array_push($logros, "Acierto al resultado! (5)");
             }
-        }
+
+
+            // Resultado exacto
+            if($resultado->getGolesLocal() == $this->getGolesLocal()){
+                if($resultado->getGolesVisitante() == $this->getGolesVisitante()){
+                    $puntos = $puntos + 3;
+                    array_push($logros, "Resultado exacto! (3)");
+                }
+            }
+
+
+            // Diferencia de goles
+            if($resultado->darDiferenciaDeGoles() == $this->darDiferenciaDeGoles()){
+               $puntos = $puntos + 2;
+               array_push($logros, "Diferencia de goles! (2)"); 
+            }
 
 
         }

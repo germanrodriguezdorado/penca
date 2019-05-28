@@ -181,9 +181,13 @@ class Resultado
             return "visitante";
         }
 
-
         return "";
-
-
     }
+
+
+
+    public function darDiferenciaDeGoles(){
+        return abs($this->getGolesLocal() - $this->getGolesVisitante());
+    }
+
 }

@@ -1,80 +1,62 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Penca</title>  
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
-</head>
 
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Penca</title>
 
-<body>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
 
-  <div class="container">
+    
 
-    <form action="{{ path("fos_user_security_check") }}" method="post">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
       <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />  
+  <img class="mb-4" src="{{ asset('imagenes/player2.png') }}" alt="" >
+  {# <h1 class="h3 mb-3 font-weight-normal">Penca</h1> #}
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input type="text" name="_username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input name="_password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <div class="checkbox mb-3">
 
-    <div class="row">
-        <div class="col-md-3" style="text-align: center;"></div>
-        <div class="col-md-6" style="text-align: center;">
-          <h3>Bienvenido a la penca</h3>
-        </div>
-        <div class="col-md-3" style="text-align: center;"></div>
-    </div>
+    {# <label>
+      <input type="checkbox" value="remember-me"> Remember me
+    </label> #}
+  </div>
+  <button class="btn btn-lg btn-info btn-block" type="submit">Ingresar</button>
 
-    <br>
-
-    <div class="row">
-        <div class="col-md-3" style="text-align: center;"></div>
-        <div class="col-md-6" style="text-align: center;">
-          Usuario <input type="text" class="form-control" placeholder="Usuario" name="_username">
-        </div>
-        <div class="col-md-3" style="text-align: center;"></div>
-    </div>
-
-    <br>
-
-    <div class="row">
-        <div class="col-md-3" style="text-align: center;"></div>
-        <div class="col-md-6" style="text-align: center;">
-          Contraseña <input type="password" class="form-control" placeholder="Contraseña" name="_password">
-        </div>
-        <div class="col-md-3" style="text-align: center;"></div>
-    </div>
-
-    <br>
-
-     <div class="row">
-        <div class="col-md-3" style="text-align: center;"></div>
-        <div class="col-md-6" style="text-align: center;">
-          <button type="submit" class="btn btn-info" name="_submit">Log In</button>
-        </div>
-        <div class="col-md-3" style="text-align: center;"></div>
-    </div>
-
-    <br>
-
-     <div class="row">
-        <div class="col-md-3" style="text-align: center;"></div>
-        <div class="col-md-6" style="text-align: center;">
-          
-           {% if error %}
-     <h4 style="color: red">{{ error.messageKey|trans(error.messageData, 'security') }}</h4>
+             {% if error %}
+              <br>
+     <h5 style="color: red; font-size: 14px;">Usuario o contraseña incorrecta</h4>
       {% endif %}
 
-        </div>
-        <div class="col-md-3" style="text-align: center;"></div>
-    </div>
 
-   
-
-
-</div>
-  </div>
-
+  <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+</form>
 </body>
-
 </html>
