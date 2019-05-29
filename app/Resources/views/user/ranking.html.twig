@@ -26,9 +26,9 @@
 
 {% for r in ranking %}
 
-<tr style="cursor: pointer;">
+<tr style="cursor: pointer; {{ r.usuario.id == app.user.id ? "font-weight: bold; font-size: 19px;" : ""}} ">
 	<td> {{ loop.index }} </td>
-	<td>{{ r.usuario.nombre|length > 50 ? r.usuario.nombre|slice(0, 50) ~ '...' : r.usuario.nombre  }} </td>
+	<td> {{ r.usuario.nombre|length > 50 ? r.usuario.nombre|slice(0, 50) ~ '...' : r.usuario.nombre  }} </td>
 	<td style="text-align: center;">{{ r.puntos }} puntos</td>
 </tr>
 
