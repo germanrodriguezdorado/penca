@@ -247,11 +247,11 @@ class Pronostico
             }
 
 
-            // Resultado exacto
+            // Marcador exacto
             if($resultado->getGolesLocal() == $this->getGolesLocal()){
                 if($resultado->getGolesVisitante() == $this->getGolesVisitante()){
                     $puntos = $puntos + 3;
-                    array_push($logros, "Resultado exacto! (3)");
+                    array_push($logros, "Marcador exacto! (3)");
                 }
             }
 
