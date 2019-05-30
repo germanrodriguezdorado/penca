@@ -3,13 +3,6 @@
 {% block main_content %}
 
 
-   
-<form action="{{ path('ingresar_pronosticos') }}" method="POST">
-
-
-
-
-
 
 <hr>
 
@@ -21,54 +14,201 @@
 
 
 <h4>PRONÓSTICOS </h4> 
-<br>
+<br>    
 
-<table class="table ">
-	
-	<tbody>
-
-	
-   {% for partido in partidos %}
-
-
-
-<tr>
-<td>{% if(partido.instancia == "Fase de grupos") %} <span class="badge badge-success">{% if(partido.grupo != "") %}Grupo {{partido.grupo }} {% else %} {{partido.instancia}} {% endif %} </span>  {% else %} <span class="badge badge-success">{{partido.instancia}}</span>  {% endif %} </td>
-<td><span class="badge ">{{ partido.dia }} {{ partido.hora }}</span></td>
-<td style="text-align: right;">{{ partido.local }}</td>
-<td><img width="30" height="20" src="{{ (partido.foto_local != "" and partido.foto_local != null ) ?  asset('fotos_equipos/'~ partido.foto_local)  : asset('imagenes/pregunta.jpg') }}"></td>
-<td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }}  value="{{ partido.pronostico.goles_local }}" type="number" name="{{partido.pronostico.id ~ "-local"}}"></td>
-<td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }} value="{{ partido.pronostico.goles_visitante }}" type="number" name="{{partido.pronostico.id ~ "-visitante"}}"></td>
-<td><img width="30" height="20" src="{{ (partido.foto_visitante != "" and partido.foto_visitante != null ) ?  asset('fotos_equipos/'~ partido.foto_visitante)  : asset('imagenes/pregunta.jpg') }}"></td>
-<td>{{ partido.visitante }}</td>
-
-
-
-{% if(partido.resultado is defined) %}
-<td><span class="badge badge-info">{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</span></td>
-<td><span class="badge">{{ partido.puntaje.puntos }} puntos</span></td>
-<td>
-	{% for logro in partido.puntaje.logros %}
-		<p style="font-size: 11px; margin-bottom: 0px;">{{ logro }}</p>
-	{% endfor %}		
-</td>
-{% else %}
-<td></td>
-<td></td>
-<td></td>
-{% endif %}	
-
-
-
-
-</tr>
 
    
+<form action="{{ path('ingresar_pronosticos') }}" method="POST">
 
 
-    {% endfor %}
-</tbody>
-</table>    
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active {{ hay_partidos_grupo == false ? "link_deshabilitado" }}" id="grupos-tab" data-toggle="tab" href="#grupos" role="tab" aria-controls="grupos" aria-selected="true">Fase de Grupos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ hay_partidos_octavos == false ? "link_deshabilitado" }}" id="octavos-tab" data-toggle="tab" href="#octavos" role="tab" aria-controls="octavos" aria-selected="false">Octavos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ hay_partidos_cuartos == false ? "link_deshabilitado" }}" id="cuartos-tab" data-toggle="tab" href="#cuartos" role="tab" aria-controls="cuartos" aria-selected="false">Cuartos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ hay_partidos_semifinal == false ? "link_deshabilitado" }}" id="semifinal-tab" data-toggle="tab" href="#semifinal" role="tab" aria-controls="semifinal" aria-selected="false">Semifinal</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ hay_partidos_final == false ? "link_deshabilitado" }}" id="final-tab" data-toggle="tab" href="#final" role="tab" aria-controls="final" aria-selected="false">Final</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="grupos" role="tabpanel" aria-labelledby="grupos-tab">
+    <br>
+    <table class="table">    
+        <tbody>    
+        {% for partido in partidos if partido.instancia == "Fase de grupos" %}
+            <tr>
+                <td><span class="badge badge-success">Grupo {{partido.grupo }}</span></td>
+                <td><span class="badge ">{{ partido.dia }} {{ partido.hora }}</span></td>
+                <td style="text-align: right;">{{ partido.local }}</td>
+                <td><img width="30" height="20" src="{{ (partido.foto_local != "" and partido.foto_local != null ) ?  asset('fotos_equipos/'~ partido.foto_local)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }}  value="{{ partido.pronostico.goles_local }}" type="number" name="{{partido.pronostico.id ~ "-local"}}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }} value="{{ partido.pronostico.goles_visitante }}" type="number" name="{{partido.pronostico.id ~ "-visitante"}}"></td>
+                <td><img width="30" height="20" src="{{ (partido.foto_visitante != "" and partido.foto_visitante != null ) ?  asset('fotos_equipos/'~ partido.foto_visitante)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td>{{ partido.visitante }}</td>
+                {% if(partido.resultado is defined) %}
+                <td><span class="badge badge-info">{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</span></td>
+                <td><span class="badge">{{ partido.puntaje.puntos }} puntos</span></td>
+                <td>
+                {% for logro in partido.puntaje.logros %}
+                    <p style="font-size: 11px; margin-bottom: 0px;">{{ logro }}</p>
+                {% endfor %}        
+                </td>
+                {% else %}
+                <td></td>
+                <td></td>
+                <td></td>
+                {% endif %} 
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>    
+  </div>
+  <div class="tab-pane fade" id="octavos" role="tabpanel" aria-labelledby="octavos-tab">
+    <br>
+    <table class="table">    
+        <tbody>    
+        {% for partido in partidos if partido.instancia == "Octavos de final" %}
+            <tr>
+                <td><span class="badge badge-success">{{partido.instancia }}</span></td>
+                <td><span class="badge ">{{ partido.dia }} {{ partido.hora }}</span></td>
+                <td style="text-align: right;">{{ partido.local }}</td>
+                <td><img width="30" height="20" src="{{ (partido.foto_local != "" and partido.foto_local != null ) ?  asset('fotos_equipos/'~ partido.foto_local)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }}  value="{{ partido.pronostico.goles_local }}" type="number" name="{{partido.pronostico.id ~ "-local"}}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }} value="{{ partido.pronostico.goles_visitante }}" type="number" name="{{partido.pronostico.id ~ "-visitante"}}"></td>
+                <td><img width="30" height="20" src="{{ (partido.foto_visitante != "" and partido.foto_visitante != null ) ?  asset('fotos_equipos/'~ partido.foto_visitante)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td>{{ partido.visitante }}</td>
+                {% if(partido.resultado is defined) %}
+                <td><span class="badge badge-info">{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</span></td>
+                <td><span class="badge">{{ partido.puntaje.puntos }} puntos</span></td>
+                <td>
+                {% for logro in partido.puntaje.logros %}
+                    <p style="font-size: 11px; margin-bottom: 0px;">{{ logro }}</p>
+                {% endfor %}        
+                </td>
+                {% else %}
+                <td></td>
+                <td></td>
+                <td></td>
+                {% endif %} 
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>    
+  </div>
+  <div class="tab-pane fade" id="cuartos" role="tabpanel" aria-labelledby="cuartos-tab">
+<br>
+    <table class="table">    
+        <tbody>    
+        {% for partido in partidos if partido.instancia == "Cuartos de final" %}
+            <tr>
+                <td><span class="badge badge-success">{{partido.instancia }}</span></td>
+                <td><span class="badge ">{{ partido.dia }} {{ partido.hora }}</span></td>
+                <td style="text-align: right;">{{ partido.local }}</td>
+                <td><img width="30" height="20" src="{{ (partido.foto_local != "" and partido.foto_local != null ) ?  asset('fotos_equipos/'~ partido.foto_local)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }}  value="{{ partido.pronostico.goles_local }}" type="number" name="{{partido.pronostico.id ~ "-local"}}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }} value="{{ partido.pronostico.goles_visitante }}" type="number" name="{{partido.pronostico.id ~ "-visitante"}}"></td>
+                <td><img width="30" height="20" src="{{ (partido.foto_visitante != "" and partido.foto_visitante != null ) ?  asset('fotos_equipos/'~ partido.foto_visitante)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td>{{ partido.visitante }}</td>
+                {% if(partido.resultado is defined) %}
+                <td><span class="badge badge-info">{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</span></td>
+                <td><span class="badge">{{ partido.puntaje.puntos }} puntos</span></td>
+                <td>
+                {% for logro in partido.puntaje.logros %}
+                    <p style="font-size: 11px; margin-bottom: 0px;">{{ logro }}</p>
+                {% endfor %}        
+                </td>
+                {% else %}
+                <td></td>
+                <td></td>
+                <td></td>
+                {% endif %} 
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>  
+  </div>
+  <div class="tab-pane fade" id="semifinal" role="tabpanel" aria-labelledby="semifinal-tab">
+<br>
+    <table class="table">    
+        <tbody>    
+        {% for partido in partidos if partido.instancia == "Semifinal" %}
+            <tr>
+                <td><span class="badge badge-success">{{partido.instancia }}</span></td>
+                <td><span class="badge ">{{ partido.dia }} {{ partido.hora }}</span></td>
+                <td style="text-align: right;">{{ partido.local }}</td>
+                <td><img width="30" height="20" src="{{ (partido.foto_local != "" and partido.foto_local != null ) ?  asset('fotos_equipos/'~ partido.foto_local)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }}  value="{{ partido.pronostico.goles_local }}" type="number" name="{{partido.pronostico.id ~ "-local"}}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }} value="{{ partido.pronostico.goles_visitante }}" type="number" name="{{partido.pronostico.id ~ "-visitante"}}"></td>
+                <td><img width="30" height="20" src="{{ (partido.foto_visitante != "" and partido.foto_visitante != null ) ?  asset('fotos_equipos/'~ partido.foto_visitante)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td>{{ partido.visitante }}</td>
+                {% if(partido.resultado is defined) %}
+                <td><span class="badge badge-info">{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</span></td>
+                <td><span class="badge">{{ partido.puntaje.puntos }} puntos</span></td>
+                <td>
+                {% for logro in partido.puntaje.logros %}
+                    <p style="font-size: 11px; margin-bottom: 0px;">{{ logro }}</p>
+                {% endfor %}        
+                </td>
+                {% else %}
+                <td></td>
+                <td></td>
+                <td></td>
+                {% endif %} 
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>  
+  </div>
+  <div class="tab-pane fade" id="final" role="tabpanel" aria-labelledby="final-tab">
+<br>
+    <table class="table">    
+        <tbody>    
+        {% for partido in partidos if partido.instancia == "Final" %}
+            <tr>
+                <td><span class="badge badge-success">{{partido.instancia }}</span></td>
+                <td><span class="badge ">{{ partido.dia }} {{ partido.hora }}</span></td>
+                <td style="text-align: right;">{{ partido.local }}</td>
+                <td><img width="30" height="20" src="{{ (partido.foto_local != "" and partido.foto_local != null ) ?  asset('fotos_equipos/'~ partido.foto_local)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }}  value="{{ partido.pronostico.goles_local }}" type="number" name="{{partido.pronostico.id ~ "-local"}}"></td>
+                <td><input maxlength="2" class="pronostico_input {{ partido.es_valido_pronosticar == false ? "des" }}" {{ partido.es_valido_pronosticar == false ? "disabled" }} value="{{ partido.pronostico.goles_visitante }}" type="number" name="{{partido.pronostico.id ~ "-visitante"}}"></td>
+                <td><img width="30" height="20" src="{{ (partido.foto_visitante != "" and partido.foto_visitante != null ) ?  asset('fotos_equipos/'~ partido.foto_visitante)  : asset('imagenes/pregunta.jpg') }}"></td>
+                <td>{{ partido.visitante }}</td>
+                {% if(partido.resultado is defined) %}
+                <td><span class="badge badge-info">{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</span></td>
+                <td><span class="badge">{{ partido.puntaje.puntos }} puntos</span></td>
+                <td>
+                {% for logro in partido.puntaje.logros %}
+                    <p style="font-size: 11px; margin-bottom: 0px;">{{ logro }}</p>
+                {% endfor %}        
+                </td>
+                {% else %}
+                <td></td>
+                <td></td>
+                <td></td>
+                {% endif %} 
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>  
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -120,8 +260,38 @@ input[type=number] {
 
 
 
+a.link_deshabilitado {
+  pointer-events: none;
+  cursor: default;
+  color: #adadad;  
+}
+
+
+
 
 </style>
+
+
+
+<script type="text/javascript">
+
+
+
+$(document).ready(function(){
+  
+
+    $('#myTab a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+});
+
+
+});
+
+
+
+
+</script>
 
 
 

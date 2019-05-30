@@ -15,15 +15,19 @@ class IngresoPronosticosController extends Controller
     {
 
 
-        // Si es admin redirigir a resultados
-        if($this->getUser()->getTipo() == "admin"){
-            return $this->redirect($this->generateUrl("resultados"));
-        }
-        
-        $respuesta = array();
+      // Si es admin redirigir a resultados
+      if($this->getUser()->getTipo() == "admin") return $this->redirect($this->generateUrl("resultados"));
+      
+      $hay_partidos_grupo = false;
+      $hay_partidos_octavos = false;  
+      $hay_partidos_cuartos = false;
+      $hay_partidos_semifinal = false;
+      $hay_partidos_final = false;
+
+      $respuesta = array();
     	$em = $this->getDoctrine()->getManager();
-    	$partidos = $em->getRepository("AppBundle:Partido")->findBy(array(), array("instancia" => "ASC","grupo" => "ASC", "fecha" => "ASC"));     
-        foreach ($partidos as $partido) {
+      $partidos = $em->getRepository("AppBundle:Partido")->findBy(array(), array("instancia" => "ASC","grupo" => "ASC", "fecha" => "ASC"));     
+      foreach ($partidos as $partido) {
           $un_partido = array();
           $un_partido["id"] = $partido->getId();
           $un_partido["local"] = $partido->getLocal()->getNombre();  
@@ -62,9 +66,19 @@ class IngresoPronosticosController extends Controller
             }else{
               $un_partido["puntaje"] = "";  
             }
-
-
           }
+
+
+
+          // Cuanto si hay partidos
+          if($partido->getInstancia() == "Fase de grupos") $hay_partidos_grupo = true;
+          if($partido->getInstancia() == "Octavos de final") $hay_partidos_octavos = true;
+          if($partido->getInstancia() == "Cuartos de final") $hay_partidos_cuartos = true;
+          if($partido->getInstancia() == "Semifinal") $hay_partidos_semifinal = true;
+          if($partido->getInstancia() == "Final") $hay_partidos_final = true;
+
+
+
 
           
           
@@ -113,7 +127,12 @@ class IngresoPronosticosController extends Controller
 
 
         return $this->render("user/inicio.html.twig", array(
-        	"partidos" => $respuesta
+        	"partidos" => $respuesta,
+          "hay_partidos_grupo" => $hay_partidos_grupo,
+          "hay_partidos_octavos" => $hay_partidos_octavos,
+          "hay_partidos_cuartos" => $hay_partidos_cuartos,
+          "hay_partidos_semifinal" => $hay_partidos_semifinal,
+          "hay_partidos_final" => $hay_partidos_final,
         ));
     }
 }

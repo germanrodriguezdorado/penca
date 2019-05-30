@@ -242,16 +242,16 @@ class Pronostico
 
             // Resultado
             if($this->darGanador() == $resultado->darGanador()){
-                $puntos = $puntos + 5;
-                array_push($logros, "Acierto al resultado! (5)");
+                $puntos = $puntos + 10;
+                array_push($logros, "Acierto al resultado! (10)");
             }
 
 
             // Marcador exacto
             if($resultado->getGolesLocal() == $this->getGolesLocal()){
                 if($resultado->getGolesVisitante() == $this->getGolesVisitante()){
-                    $puntos = $puntos + 3;
-                    array_push($logros, "Marcador exacto! (3)");
+                    $puntos = $puntos + 2;
+                    array_push($logros, "Marcador exacto! (2)");
                 }
             }
 
