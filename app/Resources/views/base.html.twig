@@ -12,35 +12,93 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="container">
+        
 
-            <br>
-                <p>
-                    {% if( app.user.tipo == "user" ) %}
-                    <a href="{{ path('reglamento') }}"> <button type="button" class="btn btn-success"> Reglamento</button> </a>
-                    <a href="{{ path('ingresar_pronosticos') }}"> <button type="button" class="btn btn-info"> Ingresar pronosticos</button> </a>
-                    <a href="{{ path('puntos_extra') }}"> <button type="button" class="btn btn-info"> Puntos extra</button> </a>
-                    <a href="{{ path('mis_datos') }}"> <button type="button" class="btn btn-info"> Info de usuario</button> </a>
-                    <a href="{{ path('redactar_sugerencias') }}"> <button type="button" class="btn btn-info"> Sugerencias</button> </a>
-                    {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            
 
-                    <a href="{{ path('ranking') }}"> <button type="button" class="btn btn-info"> Tabla</button></a>
-                    
-                    {% if( app.user.tipo == "admin" ) %}
-                    <a href="{{ path('equipos') }}"><button type="button" class="btn btn-info"> Equipos</button></a>                    
-                    <a href="{{ path('partidos') }}"><button type="button" class="btn btn-info"> Partidos</button></a>                                        
-                    <a href="{{ path('resultados') }}"><button type="button" class="btn btn-info"> Resultados</button></a>
-                    <a href="{{ path('puntos_extra_admin') }}"><button type="button" class="btn btn-info"> Puntos Extra</button></a>                    
-                    <a href="{{ path('usuarios') }}"><button type="button" class="btn btn-info"> Usuarios</button></a>                    
-                    <a href="{{ path('leer_sugerencias') }}"> <button type="button" class="btn btn-info"> Sugerencias</button> </a>
-                    {% endif %}
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-                    <a style="float: right" href="{{ path('fos_user_security_logout') }}"><button type="button" class="btn btn-info"> Salir</button></a>                    
-                    <button disabled style="float: right" type="button" class="btn btn-light">{{ app.user.nombre }}</button>
-                    
-                    
-                </p>
+            {% if( app.user.tipo == "user" ) %}
 
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "reglamento" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('reglamento') }}">Reglamento</a>
+                </li>
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "ingresar_pronosticos" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('ingresar_pronosticos') }}">Pronósticos</a>
+                </li>
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "puntos_extra" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('puntos_extra') }}">Puntos extra</a>
+                </li>
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "mis_datos" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('mis_datos') }}">Mis datos</a>
+                </li>
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "redactar_sugerencias" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('redactar_sugerencias') }}">Sugerencias</a>
+                </li>                                
+
+            {% endif %}   
+
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "ranking" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('ranking') }}">Posiciones</a>
+                </li> 
+
+
+            {% if( app.user.tipo == "admin" ) %}
+
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "equipos" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('equipos') }}">Equipos</a>
+                </li>
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "partidos" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('partidos') }}">Partidos</a>
+                </li>
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "resultados" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('resultados') }}">Resultados</a>
+                </li>
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "puntos_extra_admin" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('puntos_extra_admin') }}">Setear puntos extra</a>
+                </li>
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "usuarios" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('usuarios') }}">Usuarios</a>
+                </li>
+
+                <li class="nav-item {{ app.request.attributes.get('_route') == "leer_sugerencias" ? 'active'}}">
+                    <a class="nav-link" href="{{ path('leer_sugerencias') }}">Leer sugerencias</a>
+                </li>                                 
+
+            {% endif %}     
+          
+         
+
+
+          
+          
+          
+        </ul>
+        
+          <a style="color: #FFFFFF;" class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{ app.user.nombre }}</a>
+          <a href="{{ path('fos_user_security_logout') }}"><button class="btn btn-danger my-2 my-sm-0" type="submit">Salir</button></a>
+        
+      </div>
+</nav>
+           
+<div class="container">
+    <br>
 
     {% if( app.user.tipo == "user" ) %}
     <div class="alert alert-warning" role="alert">

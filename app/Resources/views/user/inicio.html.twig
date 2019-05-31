@@ -45,7 +45,7 @@
         <tbody>    
         {% for partido in partidos if partido.instancia == "Fase de grupos" %}
             <tr>
-                <td><span class="badge badge-success">Grupo {{partido.grupo }}</span></td>
+                <td><span class="badge badge-info">Grupo {{partido.grupo }}</span></td>
                 <td><span class="badge ">{{ partido.dia }} {{ partido.hora }}</span></td>
                 <td style="text-align: right;">{{ partido.local }}</td>
                 <td><img width="30" height="20" src="{{ (partido.foto_local != "" and partido.foto_local != null ) ?  asset('fotos_equipos/'~ partido.foto_local)  : asset('imagenes/pregunta.jpg') }}"></td>
@@ -54,7 +54,7 @@
                 <td><img width="30" height="20" src="{{ (partido.foto_visitante != "" and partido.foto_visitante != null ) ?  asset('fotos_equipos/'~ partido.foto_visitante)  : asset('imagenes/pregunta.jpg') }}"></td>
                 <td>{{ partido.visitante }}</td>
                 {% if(partido.resultado is defined) %}
-                <td><span class="badge badge-info">{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</span></td>
+                <td><span class="badge badge-success">{{ partido.resultado.goles_local }} - {{ partido.resultado.goles_visitante }}</span></td>
                 <td><span class="badge">{{ partido.puntaje.puntos }} puntos</span></td>
                 <td>
                 {% for logro in partido.puntaje.logros %}
