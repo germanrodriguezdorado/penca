@@ -23,23 +23,23 @@
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active {{ hay_partidos_grupo == false ? "link_deshabilitado" }}" id="grupos-tab" data-toggle="tab" href="#grupos" role="tab" aria-controls="grupos" aria-selected="true">Fase de Grupos</a>
+    <a class="nav-link {{ hay_partidos_grupo == true and hay_partidos_octavos == false and hay_partidos_cuartos == false and hay_partidos_semifinal == false and hay_partidos_final == false ? "active" }} {{ hay_partidos_grupo == false ? "link_deshabilitado" }}" id="grupos-tab" data-toggle="tab" href="#grupos" role="tab" aria-controls="grupos" aria-selected="true">Fase de Grupos</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ hay_partidos_octavos == false ? "link_deshabilitado" }}" id="octavos-tab" data-toggle="tab" href="#octavos" role="tab" aria-controls="octavos" aria-selected="false">Octavos</a>
+    <a class="nav-link {{ hay_partidos_octavos == true and hay_partidos_cuartos == false and hay_partidos_semifinal == false and hay_partidos_final == false ? "active" }} {{ hay_partidos_octavos == false ? "link_deshabilitado" }}" id="octavos-tab" data-toggle="tab" href="#octavos" role="tab" aria-controls="octavos" aria-selected="false">Octavos</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ hay_partidos_cuartos == false ? "link_deshabilitado" }}" id="cuartos-tab" data-toggle="tab" href="#cuartos" role="tab" aria-controls="cuartos" aria-selected="false">Cuartos</a>
+    <a class="nav-link {{ hay_partidos_cuartos == true and hay_partidos_semifinal == false and hay_partidos_final == false ? "active" }} {{ hay_partidos_cuartos == false ? "link_deshabilitado" }}" id="cuartos-tab" data-toggle="tab" href="#cuartos" role="tab" aria-controls="cuartos" aria-selected="false">Cuartos</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ hay_partidos_semifinal == false ? "link_deshabilitado" }}" id="semifinal-tab" data-toggle="tab" href="#semifinal" role="tab" aria-controls="semifinal" aria-selected="false">Semifinal</a>
+    <a class="nav-link {{ hay_partidos_semifinal == true and hay_partidos_final == false ? "active" }} {{ hay_partidos_semifinal == false ? "link_deshabilitado" }}" id="semifinal-tab" data-toggle="tab" href="#semifinal" role="tab" aria-controls="semifinal" aria-selected="false">Semifinal</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ hay_partidos_final == false ? "link_deshabilitado" }}" id="final-tab" data-toggle="tab" href="#final" role="tab" aria-controls="final" aria-selected="false">Final</a>
+    <a class="nav-link {{ hay_partidos_final == true ? "active" }} {{ hay_partidos_final == false ? "link_deshabilitado" }}" id="final-tab" data-toggle="tab" href="#final" role="tab" aria-controls="final" aria-selected="false">Final</a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="grupos" role="tabpanel" aria-labelledby="grupos-tab">
+  <div class="tab-pane fade {{ hay_partidos_grupo == true and hay_partidos_octavos == false and hay_partidos_cuartos == false and hay_partidos_semifinal == false and hay_partidos_final == false ? "show active" }}" id="grupos" role="tabpanel" aria-labelledby="grupos-tab">
     <br>
     <table class="table">    
         <tbody>    
@@ -71,7 +71,7 @@
         </tbody>
     </table>    
   </div>
-  <div class="tab-pane fade" id="octavos" role="tabpanel" aria-labelledby="octavos-tab">
+  <div class="tab-pane fade {{ hay_partidos_octavos == true and hay_partidos_cuartos == false and hay_partidos_semifinal == false and hay_partidos_final == false ? "show active" }}" id="octavos" role="tabpanel" aria-labelledby="octavos-tab">
     <br>
     <table class="table">    
         <tbody>    
@@ -103,7 +103,7 @@
         </tbody>
     </table>    
   </div>
-  <div class="tab-pane fade" id="cuartos" role="tabpanel" aria-labelledby="cuartos-tab">
+  <div class="tab-pane fade {{ hay_partidos_cuartos == true and hay_partidos_semifinal == false and hay_partidos_final == false ? "show active" }}" id="cuartos" role="tabpanel" aria-labelledby="cuartos-tab">
 <br>
     <table class="table">    
         <tbody>    
@@ -135,7 +135,7 @@
         </tbody>
     </table>  
   </div>
-  <div class="tab-pane fade" id="semifinal" role="tabpanel" aria-labelledby="semifinal-tab">
+  <div class="tab-pane fade {{ hay_partidos_semifinal == true and hay_partidos_final == false ? "show active" }}" id="semifinal" role="tabpanel" aria-labelledby="semifinal-tab">
 <br>
     <table class="table">    
         <tbody>    
@@ -167,7 +167,7 @@
         </tbody>
     </table>  
   </div>
-  <div class="tab-pane fade" id="final" role="tabpanel" aria-labelledby="final-tab">
+  <div class="tab-pane fade {{ hay_partidos_final == true ? "show active" }}" id="final" role="tabpanel" aria-labelledby="final-tab">
 <br>
     <table class="table">    
         <tbody>    

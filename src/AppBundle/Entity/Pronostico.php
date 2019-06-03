@@ -244,6 +244,13 @@ class Pronostico
             if($this->darGanador() == $resultado->darGanador()){
                 $puntos = $puntos + 10;
                 array_push($logros, "Acierto al resultado! (10)");
+                if($this->darGanador() != "empate"){
+                    // Diferencia de goles
+                    if($resultado->darDiferenciaDeGoles() == $this->darDiferenciaDeGoles()){
+                       $puntos = $puntos + 2;
+                       array_push($logros, "Diferencia de goles! (2)"); 
+                    }
+                }
             }
 
 
@@ -256,11 +263,7 @@ class Pronostico
             }
 
 
-            // Diferencia de goles
-            if($resultado->darDiferenciaDeGoles() == $this->darDiferenciaDeGoles()){
-               $puntos = $puntos + 2;
-               array_push($logros, "Diferencia de goles! (2)"); 
-            }
+            
 
 
         }
