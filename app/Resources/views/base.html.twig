@@ -107,7 +107,7 @@
     {% endif %}   #}
 
 
-    {% if( app.user.tipo == "user" ) %}
+   {#  {% if( app.user.tipo == "user" ) %}
     <div class="alert alert-warning" role="alert">
         <div class="row">
             <div class="col-md-3">
@@ -118,7 +118,7 @@
             </div>
         </div>    
     </div> 
-    {% endif %}               
+    {% endif %}        #}        
     
 
     {% for flashMessage in app.session.flashbag.get('notificacion') %}        
