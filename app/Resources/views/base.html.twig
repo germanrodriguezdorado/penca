@@ -100,9 +100,23 @@
 <div class="container">
     <br>
 
-    {% if( app.user.tipo == "user" ) %}
+   {#  {% if( app.user.tipo == "user" ) %}
     <div class="alert alert-warning" role="alert">
     FASE BETA: CUALQUIER ERROR O COSA RARA <a href="{{ path('redactar_sugerencias') }}">AVISEN</a> QUE SE VIENE LA COPA!!
+    </div> 
+    {% endif %}   #}
+
+
+    {% if( app.user.tipo == "user" ) %}
+    <div class="alert alert-warning" role="alert">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ asset('imagenes/homer.jpg') }}" height="130" width="200">
+            </div>
+            <div class="col-md-9">
+                <b><u>AVISO A LA COMUNIDAD:</u></b> <br><br>DEBIDO A UN ERROR HUMANO SE BORRARON LOS PRONOSTICOS DE TODOS LOS USUARIOS PARA EL PARTIDO ARGENTINA - MALI.
+            </div>
+        </div>    
     </div> 
     {% endif %}               
     
