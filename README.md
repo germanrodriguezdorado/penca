@@ -1,4 +1,5 @@
-draft3
+La Penca!
 ======
 
-A Symfony project created on December 3, 2018, 12:50 pm.
+Projecto libre de una penca de fútbol. 
+Fase de grupos - Octavos - Cuartos - Semis - Final
