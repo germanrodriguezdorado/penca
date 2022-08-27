@@ -17,7 +17,7 @@ composer install
 
 ### 2) Configuración de la base de datos:
 
-Abrir el archivo app/config/parameters.yml y colocar en estos valores los datos correspondientes:
+En `app/config/parameters.yml` actualizar estos datos a sus valores correspondientes:
 ```
 database_host: 127.0.0.1
 database_port: xxx
