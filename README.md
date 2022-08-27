@@ -1,4 +1,4 @@
-# La Penca :soccer:
+# :soccer: Penca :soccer:
 
 - Fase de grupos - Octavos - Cuartos - Semis - Final
 - Lenguaje: PHP
@@ -13,7 +13,7 @@
 composer install
 ````
 (Puede requerir uso de 'sudo')
-(Se requiere tener instalado [Composer](https://getcomposer.org/)
+(Se requiere tener instalado [Composer](https://getcomposer.org/))
 
 ### 2) Configuración de la base de datos:
 
@@ -41,9 +41,10 @@ php bin/console fos:user:promote german ROLE_SUPER_ADMIN
 ```
 
 ### 5) Cambiar en base de datos:
-En la tabla 'usuario', al user recien creado, agregarle 'admin' en el campo 'tipo'.
+En la tabla 'usuario', al user recién creado, agregarle 'admin' en el campo 'tipo'.
 
-### 6) Ingresar desde: http://localhost/penca/web/penca.php
+### 6) Acceder:
+Ingresar desde: http://localhost/penca/web/penca.php
 
 ## Licencia
 
