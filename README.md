@@ -13,6 +13,7 @@
 composer install
 ````
 (Puede requerir uso de 'sudo')
+(Se requiere tener instalado [Composer](https://getcomposer.org/)
 
 ### 2) Configuración de la base de datos:
 
@@ -27,16 +28,22 @@ database_password: xxx
 
 ### 3) Creación de base de datos:
 ```
-php app/console doctrine:schema:update --force
+php bin/console doctrine:schema:update --force
 ````
+(Previo a este comando crear la base de datos)
 
 ### 4) Crear un usuario admin con los siguientes comandos:
 
 ```
-php app/console fos:user:create german
-php app/console fos:user:activate german
-php app/console fos:user:promote german ROLE_SUPER_ADMIN
+php bin/console fos:user:create german
+php bin/console fos:user:activate german
+php bin/console fos:user:promote german ROLE_SUPER_ADMIN
 ```
+
+### 5) Cambiar en base de datos:
+En la tabla 'usuario', al user recien creado, agregarle 'admin' en el campo 'tipo'.
+
+### 6) Ingresar desde: http://localhost/penca/web/penca.php
 
 ## Licencia
 
