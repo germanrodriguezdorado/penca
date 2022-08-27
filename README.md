@@ -12,8 +12,8 @@
 ```
 composer install
 ````
-(Puede requerir uso de 'sudo')
-(Se requiere tener instalado [Composer](https://getcomposer.org/))
+- :warning: Puede requerir uso de 'sudo'
+- :warning: Se requiere tener instalado [Composer](https://getcomposer.org/)
 
 ### 2) Configuración de la base de datos:
 
