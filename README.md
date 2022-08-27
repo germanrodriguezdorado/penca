@@ -1,10 +1,9 @@
-# La Penca! :soccer:
+# La Penca :soccer:
 
-Penca de fútbol
-Fase de grupos - Octavos - Cuartos - Semis - Final
-Lenguaje: PHP
-Framework: Symfony 3
-Base de datos: MySQL
+- Fase de grupos - Octavos - Cuartos - Semis - Final
+- Lenguaje: PHP
+- Framework: Symfony 3
+- Base de datos: MySQL
 
 ## Instrucciones:
 
