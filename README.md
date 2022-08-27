@@ -1,4 +1,4 @@
-# :soccer: Penca :soccer:
+# Penca
 
 - Fase de grupos - Octavos - Cuartos - Semis - Final
 - Lenguaje: PHP
@@ -44,7 +44,7 @@ php bin/console fos:user:promote german ROLE_SUPER_ADMIN
 En la tabla 'usuario', al user recién creado, agregarle 'admin' en el campo 'tipo'.
 
 ### 6) Acceder:
-Ingresar desde: http://localhost/penca/web/penca.php
+Ingresar desde: http://localhost/penca/web/penca.php :soccer:
 
 ## Licencia
 
