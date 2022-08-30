@@ -46,6 +46,10 @@ En la tabla 'usuario', al user recién creado, agregarle 'admin' en el campo 'ti
 ### 6) Acceder:
 Ingresar desde: http://localhost/penca/web/penca.php :soccer:
 
+### 7) Consideraciones:
+- :man: Los usuarios se logean con su mail y se generan con la password ```123456```. Exigir a que la cambien inmediatamente.
+- :bug: El software puede contener bugs y errores. Se agradece reportarmelos.
+
 ## Licencia
 
 MIT
