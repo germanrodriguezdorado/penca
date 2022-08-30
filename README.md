@@ -47,6 +47,7 @@ En la tabla 'usuario', al user recién creado, agregarle 'admin' en el campo 'ti
 Ingresar desde: http://localhost/penca/web/penca.php :soccer:
 
 ### 7) Consideraciones:
+- Ingresar un registro a la tabla 'puntos_extra'. Es decir, tirar la siguiente query: ```INSERT INTO puntos_extra (hasta) VALUES ('2020-01-01 12:00:00');```
 - :man: Los usuarios se logean con su mail y se generan con la password ```123456```. Exigir a que la cambien inmediatamente.
 - :bug: El software puede contener bugs y errores. Se agradece reportarmelos.
 
